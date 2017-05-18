@@ -40,13 +40,10 @@ build/frida-env-%.rc: releng/setup-env.sh releng/config.site.in build/frida-vers
 	FRIDA_HOST=$* \
 		FRIDA_OPTIMIZATION_FLAGS="$(FRIDA_OPTIMIZATION_FLAGS)" \
 		FRIDA_DEBUG_FLAGS="$(FRIDA_DEBUG_FLAGS)" \
-		FRIDA_STRIP=$(FRIDA_STRIP) \
-		FRIDA_DIET=$(FRIDA_DIET) \
-		FRIDA_MAPPER=$(FRIDA_MAPPER) \
 		FRIDA_ASAN=$(FRIDA_ASAN) \
 		./releng/setup-env.sh
 
-build/frida-version.h: releng/generate-version-header.py .git/refs/heads/master
+build/frida-version.h: releng/generate-version-header.py .git/refs/heads/feature/meson
 	@python releng/generate-version-header.py > $@.tmp
 	@mv $@.tmp $@
 

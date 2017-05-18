@@ -82,7 +82,6 @@ clean: clean-submodules
 	rm -rf build/tmp_stripped-qnx-i386
 	rm -rf build/tmp_stripped-qnx-arm
 	rm -rf build/tmp_stripped-qnx-armeabi
-	rm -rf $(BINDIST)
 
 clean-submodules:
 	cd capstone && git clean -xfd
@@ -372,76 +371,28 @@ check-core-android-arm64: build/tmp_stripped-android-arm/frida-core/src/frida-he
 			AGENT64=../../../../build/tmp_stripped-android-arm64/frida-core/lib/agent/.libs/libfrida-agent.so!frida-agent-64.so
 
 server-32: build/frida_stripped-linux-i386/bin/frida-server ##@server Build for i386
-	mkdir -p $(BINDIST)/bin
-	cp -f build/frida_stripped-linux-i386/bin/frida-server $(BINDIST)/bin/frida-server-linux-32
 server-64: build/frida_stripped-linux-x86_64/bin/frida-server ##@server Build for x86-64
-	mkdir -p $(BINDIST)/bin
-	cp -f build/frida_stripped-linux-x86_64/bin/frida-server $(BINDIST)/bin/frida-server-linux-64
 server-arm: build/frida_stripped-linux-arm/bin/frida-server ##@server Build for arm
-	mkdir -p $(BINDIST)/bin
-	cp -f build/frida_stripped-linux-arm/bin/frida-server $(BINDIST)/bin/frida-server-linux-arm
 server-armhf: build/frida_stripped-linux-armhf/bin/frida-server ##@server Build for arm
-	mkdir -p $(BINDIST)/bin
-	cp -f build/frida_stripped-linux-armhf/bin/frida-server $(BINDIST)/bin/frida-server-linux-armhf
 server-mips: build/frida_stripped-linux-mips/bin/frida-server ##@server Build for mips
-	mkdir -p $(BINDIST)/bin
-	cp -f build/frida_stripped-linux-mips/bin/frida-server $(BINDIST)/bin/frida-server-linux-mips
 server-mipsel: build/frida_stripped-linux-mipsel/bin/frida-server ##@server Build for mipsel
-	mkdir -p $(BINDIST)/bin
-	cp -f build/frida_stripped-linux-mipsel/bin/frida-server $(BINDIST)/bin/frida-server-linux-mipsel
 server-android: build/frida_stripped-android-i386/bin/frida-server build/frida_stripped-android-x86_64/bin/frida-server build/frida_stripped-android-arm/bin/frida-server build/frida_stripped-android-arm64/bin/frida-server ##@server Build for Android
-	mkdir -p $(BINDIST)/bin
-	cp -f build/frida_stripped-android-i386/bin/frida-server $(BINDIST)/bin/frida-server-android-i386
-	cp -f build/frida_stripped-android-x86_64/bin/frida-server $(BINDIST)/bin/frida-server-android-x86_64
-	cp -f build/frida_stripped-android-arm/bin/frida-server $(BINDIST)/bin/frida-server-android-arm
-	cp -f build/frida_stripped-android-arm64/bin/frida-server $(BINDIST)/bin/frida-server-android-arm64
 server-qnx-arm: build/frida_stripped-qnx-arm/bin/frida-server ##@server Build for QNX-arm
-	mkdir -p $(BINDIST)/bin
-	cp -f build/frida_stripped-qnx-arm/bin/frida-server $(BINDIST)/bin/frida-server-qnx-arm
 server-qnx-armeabi: build/frida_stripped-qnx-armeabi/bin/frida-server ##@server Build for QNX-armeabi
-	mkdir -p $(BINDIST)/bin
-	cp -f build/frida_stripped-qnx-armeabi/bin/frida-server $(BINDIST)/bin/frida-server-qnx-armeabi
 
 inject-32: build/frida_stripped-linux-i386/bin/frida-inject ##@inject Build for i386
-	mkdir -p $(BINDIST)/bin
-	cp -f build/frida_stripped-linux-i386/bin/frida-inject $(BINDIST)/bin/frida-inject-linux-32
 inject-64: build/frida_stripped-linux-x86_64/bin/frida-inject ##@inject Build for x86-64
-	mkdir -p $(BINDIST)/bin
-	cp -f build/frida_stripped-linux-x86_64/bin/frida-inject $(BINDIST)/bin/frida-inject-linux-64
 inject-arm: build/frida_stripped-linux-arm/bin/frida-inject ##@inject Build for arm
-	mkdir -p $(BINDIST)/bin
-	cp -f build/frida_stripped-linux-arm/bin/frida-inject $(BINDIST)/bin/frida-inject-linux-arm
 inject-armhf: build/frida_stripped-linux-armhf/bin/frida-inject ##@inject Build for armhf
-	mkdir -p $(BINDIST)/bin
-	cp -f build/frida_stripped-linux-armhf/bin/frida-inject $(BINDIST)/bin/frida-inject-linux-armhf
 
 gadget-32: build/frida_stripped-linux-i386/lib/frida-gadget.so ##@gadget Build for i386
-	mkdir -p $(BINDIST)/lib
-	cp -f $< $(BINDIST)/lib/frida-gadget-32.so
 gadget-64: build/frida_stripped-linux-x86_64/lib/frida-gadget.so ##@gadget Build for x86-64
-	mkdir -p $(BINDIST)/lib
-	cp -f $< $(BINDIST)/lib/frida-gadget-64.so
 gadget-android: build/frida-android-i386/lib/frida-gadget.so build/frida-android-x86_64/lib/frida-gadget.so build/frida-android-arm/lib/frida-gadget.so build/frida-android-arm64/lib/frida-gadget.so ##@gadget Build for Android
-	mkdir -p $(BINDIST)/lib
-	cp -f build/frida-android-i386/lib/frida-gadget.so $(BINDIST)/lib/frida-gadget-android-i386.so
-	cp -f build/frida-android-x86_64/lib/frida-gadget.so $(BINDIST)/lib/frida-gadget-android-x86_64.so
-	cp -f build/frida-android-arm/lib/frida-gadget.so $(BINDIST)/lib/frida-gadget-android-arm.so
-	cp -f build/frida-android-arm64/lib/frida-gadget.so $(BINDIST)/lib/frida-gadget-android-arm64.so
 gadget-arm: build/frida_stripped-linux-arm/lib/frida-gadget.so ##@gadget Build for linux-arm
-	mkdir -p $(BINDIST)/lib
-	cp -f $< $(BINDIST)/lib/frida-gadget-arm.so
 gadget-armhf: build/frida_stripped-linux-armhf/lib/frida-gadget.so ##@gadget Build for linux-armhf
-	mkdir -p $(BINDIST)/lib
-	cp -f $< $(BINDIST)/lib/frida-gadget-armhf.so
 gadget-mipsel: build/frida_stripped-linux-mipsel/lib/frida-gadget.so ##@gadget Build for mipsel
-	mkdir -p $(BINDIST)/lib
-	cp -f $< $(BINDIST)/lib/frida-gadget-mipsel.so
 gadget-qnx-arm: build/frida_stripped-qnx-arm/lib/frida-gadget.so ##@gadget Build for qnx-arm
-	mkdir -p $(BINDIST)/lib
-	cp -f $< $(BINDIST)/lib/frida-gadget-qnx-arm.so
 gadget-qnx-armeabi: build/frida_stripped-qnx-armeabi/lib/frida-gadget.so ##@gadget Build for qnx-armeabi
-	mkdir -p $(BINDIST)/lib
-	cp -f $< $(BINDIST)/lib/frida-gadget-qnx-armeabi.so
 
 build/frida_stripped-%/bin/frida-server: build/frida-%/bin/frida-server
 	mkdir -p $(@D)
@@ -465,12 +416,7 @@ build/frida-%/bin/frida-inject: build/frida-%/lib/pkgconfig/frida-core-1.0.pc
 
 
 python-32: build/frida_stripped-linux-i386/lib/$(PYTHON_NAME)/site-packages/frida build/frida_stripped-linux-i386/lib/$(PYTHON_NAME)/site-packages/_frida.so build/frida-python-submodule-stamp ##@python Build Python bindings for i386
-	mkdir -p $(BINDIST)/lib32/$(PYTHON_NAME)/site-packages
-	cp -rf build/frida_stripped-linux-i386/lib/$(PYTHON_NAME)/* $(BINDIST)/lib32/$(PYTHON_NAME)/site-packages
-
 python-64: build/frida_stripped-linux-x86_64/lib/$(PYTHON_NAME)/site-packages/frida build/frida_stripped-linux-x86_64/lib/$(PYTHON_NAME)/site-packages/_frida.so build/frida-python-submodule-stamp ##@python Build Python bindings for x86-64
-	mkdir -p $(BINDIST)/lib64/$(PYTHON_NAME)/site-packages
-	cp -rf build/frida_stripped-linux-x86_64/lib/$(PYTHON_NAME)/* $(BINDIST)/lib64/$(PYTHON_NAME)/site-packages
 
 frida-python/configure: build/frida-env-linux-$(build_arch).rc frida-python/configure.ac
 	. build/frida-env-linux-$(build_arch).rc && cd frida-python && ./autogen.sh
@@ -506,12 +452,7 @@ check-python-64: build/frida_stripped-linux-x86_64/lib/$(PYTHON_NAME)/site-packa
 
 
 node-32: build/frida_stripped-linux-i386/lib/node_modules/frida build/frida-node-submodule-stamp ##@node Build Node.js bindings for i386
-	mkdir -p $(BINDIST)/lib32/node_modules
-	cp -rf build/frida_stripped-linux-i386/lib/node_modules/frida $(BINDIST)/lib32/node_modules
-
 node-64: build/frida_stripped-linux-x86_64/lib/node_modules/frida build/frida-node-submodule-stamp ##@node Build Node.js bindings for x86-64
-	mkdir -p $(BINDIST)/lib64/node_modules
-	cp -rf build/frida_stripped-linux-x86_64/lib/node_modules/frida $(BINDIST)/lib64/node_modules
 
 build/frida_stripped-%/lib/node_modules/frida: build/frida-%/lib/pkgconfig/frida-core-1.0.pc build/frida-node-submodule-stamp
 	@$(NPM) --version &>/dev/null || (echo -e "\033[31mOops. It appears Node.js is not installed.\nCheck PATH or set NODE to the absolute path of your Node.js binary.\033[0m"; exit 1;)
